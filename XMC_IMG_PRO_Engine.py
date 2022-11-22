@@ -6,7 +6,7 @@ import numpy as np
 from datetime import datetime
 
 
-class Rust_Engine:
+class Engine:
     """Rust Engine"""
 
     def logger(FILE, STATUS):

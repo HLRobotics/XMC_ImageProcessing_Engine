@@ -1,2 +1,4 @@
-# Rust-Detection-and-Tracking-Engine
-Rust Detection and Tracking Engine (Industrial Application)
+# XMC Image Processing Engine
+Custom Drone Image Processing Tool (Industrial Application)
+
+(under developmental phase)
