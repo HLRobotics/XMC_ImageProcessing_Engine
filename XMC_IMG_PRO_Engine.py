@@ -9,7 +9,7 @@ from datetime import datetime
 class Engine:
     """Rust Engine"""
 
-    def logger(FILE, STATUS):
+    def logger(self, FILE, STATUS):
         """Logger functionality"""
         now = datetime.now()
         file = open("Log.txt", "a")
@@ -20,7 +20,7 @@ class Engine:
             file.write("End TIme: " + str(now))
         file.close()
 
-    def edge_generator(DIR_PATH):
+    def edge_generator(self, DIR_PATH):
         """Generate edge detected Images"""
         count = 0
         for filename in glob.glob(DIR_PATH + "/*.jpg"):
@@ -33,7 +33,7 @@ class Engine:
             print("[ ISW Engine:Writing to Edge " + filename + "]")
         return True
 
-    def image_to_video(IMAGE_DIR, NAME):
+    def image_to_video(self, IMAGE_DIR, NAME):
         """Convert Image Sequence to video Format"""
         img_array = []
         for filename in glob.glob(IMAGE_DIR + "/*.jpg"):
@@ -50,7 +50,7 @@ class Engine:
         print("[ ISW ENGINE VIDEO GENERATED ]")
         return True
 
-    def video_to_image(PATH):
+    def video_to_image(self, PATH):
         """Convert video to image format"""
         vidcap = cv2.VideoCapture(str(PATH))
         success, image = vidcap.read()
@@ -65,7 +65,7 @@ class Engine:
             print("[ ISW ENGINE Converting Image...FRAMES/frame", str(count) + ".jpg]")
         return True
 
-    def selection(DIR_PATH):
+    def selection(self, DIR_PATH):
         """Selection process of required images"""
         for root, dirs, files in os.walk(DIR_PATH):
             total_files = len(files)
@@ -83,7 +83,7 @@ class Engine:
                     file_Count = file_Count + 1
         return True
 
-    def image_to_rust_detected_image(DIR_PATH):
+    def image_to_rust_detected_image(self, DIR_PATH):
         """Image to rust detected images"""
         print("[ ISW ENGINE RUST DETECTION TOOL ]")
         print("[ Getting ready ...]")
@@ -122,7 +122,7 @@ class Engine:
                 print("[ ISW ENGINE Saving Rust Detected Image... " + file + " ]")
         return True
 
-    def tracking_and_marking(filename):
+    def tracking_and_marking(self, filename):
         """Tracking and marking sub function"""
         img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
         _, threshold = cv2.threshold(img, 110, 255, cv2.THRESH_BINARY)
@@ -145,7 +145,7 @@ class Engine:
                 i = i + 1
         return xlist, ylist
 
-    def Crack_Detection(DIR_PATH):
+    def Crack_Detection(self, DIR_PATH):
         """Detecting crack in an object"""
         for filename in glob.glob(DIR_PATH + "/*.jpg"):
             img = cv2.imread(filename)
@@ -174,13 +174,13 @@ class Engine:
             print("[ ISW ENGINE Saving Crack Detected Image... " + filename + " ]")
         return True
 
-    def mark(DIR_PATH):
+    def mark(self, DIR_PATH):
         """Mark the tracked image"""
         for filename in glob.glob(DIR_PATH + "/*.jpg"):
             Status = False
             fontScale = 1
             font = cv2.FONT_HERSHEY_SIMPLEX
-            xList, yList = Tracking_and_Marking(filename)
+            xList, yList = self.tracking_and_marking(filename)
             mapping = dict(zip(xList, yList))
             for x in mapping.keys():
                 x = x
