@@ -30,7 +30,7 @@ class Engine:
             edges = cv2.Canny(img, 100, 200)
             os.path.basename(filename)
             cv2.imwrite("EDGE/" + str(os.path.basename(filename)), edges)
-            print("[ ISW Engine:Writing to Edge " + filename + "]")
+            print("[ XMC ENGINE:Writing to Edge " + filename + "]")
         return True
 
     def image_to_video(self, IMAGE_DIR, NAME):
@@ -44,10 +44,10 @@ class Engine:
         out = cv2.VideoWriter(NAME + "_OUTPUT.avi", cv2.VideoWriter_fourcc(*"DIVX"), 0.5, size)
         for i in range(len(img_array)):
             out.write(img_array[i])
-            print("[ ISW ENGINE GENERATING VIDEO ..... ]")
+            print("[ XMC ENGINE GENERATING VIDEO ..... ]")
 
         out.release()
-        print("[ ISW ENGINE VIDEO GENERATED ]")
+        print("[ XMC ENGINE VIDEO GENERATED ]")
         return True
 
     def video_to_image(self, PATH):
@@ -55,14 +55,14 @@ class Engine:
         vidcap = cv2.VideoCapture(str(PATH))
         success, image = vidcap.read()
         count = 0
-        print("[ ISW ENGINE VIDEO TO IMAGE CONVERTER TOOL ]")
+        print("[ XMC ENGINE VIDEO TO IMAGE CONVERTER TOOL ]")
         print("[ Getting ready ...]")
 
         while success:
             cv2.imwrite("FRAMES/frame%d.jpg" % count, image)
             success, image = vidcap.read()
             count += 1
-            print("[ ISW ENGINE Converting Image...FRAMES/frame", str(count) + ".jpg]")
+            print("[ XMC ENGINE Converting Image...FRAMES/frame", str(count) + ".jpg]")
         return True
 
     def selection(self, DIR_PATH):
@@ -85,7 +85,7 @@ class Engine:
 
     def image_to_rust_detected_image(self, DIR_PATH):
         """Image to rust detected images"""
-        print("[ ISW ENGINE RUST DETECTION TOOL ]")
+        print("[ XMC ENGINE RUST DETECTION TOOL ]")
         print("[ Getting ready ...]")
         count = 0
         for root, dirs, files in os.walk(DIR_PATH):
@@ -119,7 +119,7 @@ class Engine:
                 # Combine the 3 different masks with the different shades into 1 image file
                 final = cv2.bitwise_or(output1, output2)
                 cv2.imwrite("RUST/" + str(os.path.basename(file)), final)
-                print("[ ISW ENGINE Saving Rust Detected Image... " + file + " ]")
+                print("[ XMC ENGINE Saving Rust Detected Image... " + file + " ]")
         return True
 
     def tracking_and_marking(self, filename):
@@ -171,7 +171,7 @@ class Engine:
             keypoints, descriptors = orb.detectAndCompute(closing, None)
             featuredImg = cv2.drawKeypoints(closing, keypoints, None)
             cv2.imwrite("CRACK/" + str(os.path.basename(filename)), featuredImg)
-            print("[ ISW ENGINE Saving Crack Detected Image... " + filename + " ]")
+            print("[ XMC ENGINE Saving Crack Detected Image... " + filename + " ]")
         return True
 
     def mark(self, DIR_PATH):
@@ -194,7 +194,7 @@ class Engine:
                     # image = cv2.rectangle(image, start_point, end_point, color, thickness)
                     image = cv2.putText(image, "#", (x, y), font, fontScale, color, thickness, cv2.LINE_AA)
                     cv2.imwrite("MARKED/" + FILENAME, image)
-                    print("[ ISW ENGINE Marking" + filename + "]")
+                    print("[ XMC ENGINE Marking" + filename + "]")
                     Status = True
                 else:
                     path = "MARKED/" + FILENAME
@@ -204,6 +204,6 @@ class Engine:
                     # image = cv2.rectangle(image, start_point, end_point, color, thickness)
                     image = cv2.putText(image, "#", (x, y), font, fontScale, color, thickness, cv2.LINE_AA)
                     cv2.imwrite("MARKED/" + FILENAME, image)
-                    print("[ ISW ENGINE Marking" + filename, (x, y), "]")
+                    print("[ XMC ENGINE Marking" + filename, (x, y), "]")
                     Status = True
         return True
